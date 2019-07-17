@@ -1,6 +1,6 @@
 class Api::V1::StripesController < ApplicationController
   def charges
-    Stripe.api_key = ENV['STRIPE_SK']
+    Stripe.api_key = Rails.application.credentials.dig(:stripe_sk)
     @amount = params[:amount]
 
     begin
@@ -25,7 +25,7 @@ class Api::V1::StripesController < ApplicationController
   end
 
   def transfers
-    Stripe.api_key = ENV['STRIPE_SK']
+    Stripe.api_key = Rails.application.credentials.dig(:stripe_sk)
     @amount = params[:amount]
 
     user = User.find(params[:id])

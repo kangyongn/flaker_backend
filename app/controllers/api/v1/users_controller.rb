@@ -22,7 +22,7 @@ class Api::V1::UsersController < ApplicationController
 
   def stripe_callback
     stripe_test_client_id = 'ca_EwmL3WIkrp6NYggrQouufNg2VodKcbhW'
-    stripe_test_secret_key = ENV['STRIPE_SK']
+    stripe_test_secret_key = Rails.application.credentials.dig(:stripe_sk)
 
     options = {
       site: 'https://connect.stripe.com',
