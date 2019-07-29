@@ -22,7 +22,7 @@ class Api::V1::UsersController < ApplicationController
 
   def stripe_callback
     stripe_test_client_id = 'ca_EwmL3WIkrp6NYggrQouufNg2VodKcbhW'
-    stripe_test_secret_key = Rails.application.credentials.dig(:stripe_sk)
+    stripe_test_secret_key = ENV[STRIPE_SK]
 
     options = {
       site: 'https://connect.stripe.com',
@@ -39,7 +39,7 @@ class Api::V1::UsersController < ApplicationController
     @user = User.find(id)
     @user.update!(stripe_id: @response.params['stripe_user_id']) if @response
 
-    redirect_to 'http://localhost:3001'
+    redirect_to 'https://flaker-frontend.herokuapp.com/creator-dashboard'
   end
 
   def update
